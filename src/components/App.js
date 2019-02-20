@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 
+import { precognitions } from "./Data";
 import Particles from "./ParticleBG";
 import { Container, Row, Col } from "react-bootstrap";
 import SoundClip from "./sound/Sound";
@@ -11,106 +12,6 @@ import bgfile from "../assets/eightBall.mp3";
 import clickfile from "../assets/eightBallTouch.mp3";
 import shakefile from "../assets/eightBallShake.mp3";
 import ball from "../assets/blankBall.png";
-
-const precognitions = [
-  {
-    txtColor: "whitesmoke",
-    bgColor: "#F65314",
-    text: "don't count on it"
-  },
-  {
-    txtColor: "whitesmoke",
-    bgColor: "#F65314",
-    text: "my reply is no"
-  },
-  {
-    txtColor: "#A4C639",
-    bgColor: "#F65314",
-    text: "my sources say no"
-  },
-  {
-    txtColor: "whitesmoke",
-    bgColor: "#F65314",
-    text: "outlook not so good"
-  },
-  {
-    txtColor: "blue",
-    bgColor: "#F65314",
-    text: "very doubtful"
-  },
-
-  {
-    txtColor: "red",
-    bgColor: " #7CBB00",
-    text: "yes"
-  },
-  {
-    txtColor: "yellow",
-    bgColor: " #7CBB00",
-    text: "it is certain"
-  },
-  {
-    txtColor: "whitesmoke",
-    bgColor: " #7CBB00",
-    text: "without a doubt"
-  },
-  {
-    txtColor: "blue",
-    bgColor: " #7CBB00",
-    text: "yes, definitely"
-  },
-  {
-    txtColor: "yellow",
-    bgColor: " #7CBB00",
-    text: "you may rely on it"
-  },
-  {
-    txtColor: "whitesmoke",
-    bgColor: " #7CBB00",
-    text: "as i see it, yes"
-  },
-  {
-    txtColor: "purple",
-    bgColor: " #7CBB00",
-    text: "most likely"
-  },
-  {
-    txtColor: "yellow",
-    bgColor: " #7CBB00",
-    text: "outlook good"
-  },
-  {
-    txtColor: "whitesmoke",
-    bgColor: " #7CBB00",
-    text: "signs point to yes"
-  },
-
-  {
-    txtColor: "purple",
-    bgColor: "#ffe700",
-    text: "good luck"
-  },
-  {
-    txtColor: "orange",
-    bgColor: "#001eff",
-    text: "reply hazy, try again"
-  },
-  {
-    txtColor: "blue",
-    bgColor: "orange",
-    text: "ask again later"
-  },
-  {
-    txtColor: "#f000ff",
-    bgColor: "#001eff",
-    text: "can't tell you now"
-  },
-  {
-    txtColor: "whitesmoke",
-    bgColor: "#74ee15",
-    text: "reconsider and ask again"
-  }
-];
 
 export default class App extends Component {
   state = {
