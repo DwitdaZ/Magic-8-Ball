@@ -3,78 +3,85 @@ import "./App.css";
 
 import Particles from "./ParticleBG";
 import { Container, Row, Col } from "react-bootstrap";
-import logo from "../assests/magic8ballLOGO.png";
+import SoundClip from "./sound/Sound";
+import ContentBar from "./nav/Navbar";
+
+import logo from "../assets/magic8ballLOGO.png";
+import bgfile from "../assets/eightBall.mp3";
+import clickfile from "../assets/eightBallTouch.mp3";
+import shakefile from "../assets/eightBallShake.mp3";
+import ball from "../assets/blankBall.png";
 
 const precognitions = [
   {
-    txtColor: "yellow",
-    bgColor: "red",
+    txtColor: "whitesmoke",
+    bgColor: "#F65314",
     text: "don't count on it"
   },
   {
-    txtColor: "white",
-    bgColor: "red",
+    txtColor: "whitesmoke",
+    bgColor: "#F65314",
     text: "my reply is no"
   },
   {
-    txtColor: "black",
-    bgColor: "red",
+    txtColor: "#A4C639",
+    bgColor: "#F65314",
     text: "my sources say no"
   },
   {
-    txtColor: "white",
-    bgColor: "red",
+    txtColor: "whitesmoke",
+    bgColor: "#F65314",
     text: "outlook not so good"
   },
   {
-    txtColor: "black",
-    bgColor: "red",
+    txtColor: "blue",
+    bgColor: "#F65314",
     text: "very doubtful"
   },
 
   {
-    txtColor: "black",
-    bgColor: "green",
+    txtColor: "red",
+    bgColor: " #7CBB00",
     text: "yes"
   },
   {
     txtColor: "yellow",
-    bgColor: "green",
+    bgColor: " #7CBB00",
     text: "it is certain"
   },
   {
-    txtColor: "white",
-    bgColor: "green",
+    txtColor: "whitesmoke",
+    bgColor: " #7CBB00",
     text: "without a doubt"
   },
   {
-    txtColor: "black",
-    bgColor: "green",
+    txtColor: "blue",
+    bgColor: " #7CBB00",
     text: "yes, definitely"
   },
   {
     txtColor: "yellow",
-    bgColor: "green",
+    bgColor: " #7CBB00",
     text: "you may rely on it"
   },
   {
-    txtColor: "white",
-    bgColor: "green",
+    txtColor: "whitesmoke",
+    bgColor: " #7CBB00",
     text: "as i see it, yes"
   },
   {
-    txtColor: "black",
-    bgColor: "green",
+    txtColor: "purple",
+    bgColor: " #7CBB00",
     text: "most likely"
   },
   {
     txtColor: "yellow",
-    bgColor: "green",
+    bgColor: " #7CBB00",
     text: "outlook good"
   },
   {
-    txtColor: "white",
-    bgColor: "green",
+    txtColor: "whitesmoke",
+    bgColor: " #7CBB00",
     text: "signs point to yes"
   },
 
@@ -89,19 +96,19 @@ const precognitions = [
     text: "reply hazy, try again"
   },
   {
-    txtColor: "black",
+    txtColor: "blue",
     bgColor: "orange",
     text: "ask again later"
   },
   {
     txtColor: "#f000ff",
     bgColor: "#001eff",
-    text: "better not tell you now"
+    text: "can't tell you now"
   },
   {
-    txtColor: "white",
+    txtColor: "whitesmoke",
     bgColor: "#74ee15",
-    text: "concentrate and ask again"
+    text: "reconsider and ask again"
   }
 ];
 
@@ -112,17 +119,27 @@ export default class App extends Component {
       backcolor: "whitesmoke",
       txtresponse: "Click to Shake"
     },
-    reading: false
+    reading: false,
+    isOn: true,
+    btnText: "Off",
+    fxOn: true,
+    fxBtn: "Off",
+    press: false,
+    adjustSettings: false,
+    bgSelect: 1
   };
+
+  componentWillMount() {
+    document.body.style.backgroundImage =
+      "radial-gradient(circle, #ff33cc, #ad1fd8, #000099, #001f5c)";
+  }
 
   handleBallShake = evt => {
     evt.preventDefault();
-    this.setState({ reading: !this.reading });
+    this.setState({ reading: !this.reading, press: !this.state.press });
     setTimeout(() => {
-      const shakeResponse = arr =>
+      const reading =
         precognitions[Math.floor(Math.random() * precognitions.length)];
-
-      const reading = shakeResponse(precognitions);
       const { txtColor, bgColor, text } = reading;
 
       this.setState({
@@ -131,40 +148,108 @@ export default class App extends Component {
           backcolor: bgColor,
           txtresponse: text
         },
-        reading: !this.state.reading
+        reading: !this.state.reading,
+        press: !this.state.press
       });
-    }, 1000);
+    }, 1200);
+  };
+
+  toggleContentDrawer = evt => {
+    evt.preventDefault();
+    this.setState({ adjustSettings: !this.state.adjustSettings });
+  };
+
+  toggleMusicHandler = evt => {
+    evt.preventDefault();
+    let status = !this.state.isOn ? "Off" : "On";
+    this.setState({
+      isOn: !this.state.isOn,
+      btnText: status
+    });
+  };
+
+  toggleSoundHamdler = evt => {
+    evt.preventDefault();
+    let status = !this.state.fxOn ? "Off" : "On";
+    this.setState({
+      fxOn: !this.state.fxOn,
+      fxBtn: status
+    });
+  };
+
+  backgroundSelectHandler = bg => {
+    switch (bg) {
+      case 2:
+        document.body.style.backgroundImage =
+          "linear-gradient(#000066, #0033cc, #000066)";
+        break;
+      case 3:
+        document.body.style.backgroundImage =
+          "radial-gradient(circle, #ad1fd8, #660066,  #000066, #660066)";
+        break;
+      default:
+        document.body.style.backgroundImage =
+          "radial-gradient(circle, #ff33cc, #ad1fd8, #000099, #001f5c)";
+        break;
+    }
+
+    this.setState({ bgSelect: bg });
   };
 
   render() {
     const { frontcolor, backcolor, txtresponse } = this.state.response;
-    const animate = this.state.reading
-      ? "centered shaking textVapor"
-      : "centered";
+
+    const animate = this.state.reading ? "shaking textVapor" : null;
+
+    const bgAudio = this.state.isOn ? (
+      <SoundClip play="{true}" repeat="{true}" url={bgfile} />
+    ) : null;
+
+    const touch =
+      this.state.press && this.state.fxOn ? (
+        <SoundClip play="{true}" url={clickfile} />
+      ) : null;
+
+    const shake =
+      this.state.press && this.state.fxOn ? (
+        <SoundClip play="{true}" url={shakefile} />
+      ) : null;
 
     return (
       <Fragment>
-        <br />
-        <Row className="pt-3">
-          <Col className="text-center" xs={{ span: 8, offset: 2 }}>
-            <img className="img-fluid" src={logo} alt="s8b logo" />
-          </Col>
-        </Row>
+        {bgAudio}
+        {touch}
+        {shake}
+        <ContentBar
+          {...this.state}
+          toggleDrawer={this.toggleContentDrawer}
+          switchMusicOn={this.toggleMusicHandler}
+          switchfxOn={this.toggleSoundHamdler}
+          changeBG={this.backgroundSelectHandler}
+        />
         <Container className="App">
-          <Col id="ballBody" className={animate}>
-            <Col
-              id="ballCenter"
-              className="centered"
-              style={{ backgroundColor: backcolor }}
-              onClick={this.handleBallShake}
-            >
-              <Col id="ballText" className="centered text-center">
-                <Col>
-                  <span style={{ color: frontcolor }}>{txtresponse}</span>
+          <Row>
+            <Col className="text-center" sm={{ span: 8, offset: 2 }}>
+              <img className="img-fluid" src={logo} alt="s8b logo" />
+            </Col>
+          </Row>
+          <Row id="ballDiv" className="justify-content-center">
+            <Col id="ballBody" className={animate}>
+              <img src={ball} id="ballImg" className="d-block" alt="/" />
+              <Col
+                id="ballCenter"
+                className="centered"
+                style={{ backgroundColor: backcolor }}
+                onClick={this.handleBallShake}
+              >
+                <Col id="ballText" className="text-center">
+                  <Col>
+                    <span style={{ color: frontcolor }}>{txtresponse}</span>
+                  </Col>
                 </Col>
               </Col>
             </Col>
-          </Col>
+          </Row>
           <Particles />
         </Container>
       </Fragment>

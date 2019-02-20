@@ -4,12 +4,15 @@ html {
 
 body {
   min-height: 100%;
-  background: radial-gradient(circle, #ff33cc, #ad1fd8, #000099, #001f5c);
+}
+
+#root {
+  height: 100vh;
 }
 
 .App {
-  font-family: sans-serif;
-  min-height: 100%;
+  font-family: Helvetica, sans-serif;
+  height: 90vh;
 }
 
 .particleBG {
@@ -19,49 +22,6 @@ body {
   left: 0;
   right: 0;
   z-index: -1;
-}
-
-#ballBody {
-  border-radius: 100%;
-  background-color: black;
-  height: 50vh;
-  width: 50vh;
-  padding: 0;
-}
-
-#ballCenter {
-  border-radius: 100%;
-  transition-duration: 2s;
-  height: 60%;
-  width: 60%;
-  padding: 0;
-  box-shadow: 0px 5px 50px 1px inset;
-}
-
-#ballText {
-  transition-duration: 1s;
-  font-size: 4vh;
-}
-
-#ballBody.centered {
-  position: absolute;
-  left: 50%;
-  top: 65%;
-  transform: translate(-50%, -50%);
-}
-
-#ballText.centered {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#ballCenter.centered {
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
 }
 
 .shaking {
@@ -79,15 +39,156 @@ body {
 
 @keyframes shake {
   0% {
-    left: 50%;
+    left: -2%;
   }
   25% {
-    left: 45%;
+    left: 8%;
   }
   75% {
-    left: 55%;
+    left: -8%;
   }
   100% {
-    left: 50%;
+    left: 2%;
   }
 }
+
+/* Extra small devices (phones, below 350px) */
+@media only screen and (max-width: 349px) {
+  #ballImg {
+    width: 100%;
+    margin: auto;
+  }
+
+  #ballBody {
+    width: 30%;
+    height: 30%;
+    padding: 2vmin;
+  }
+
+  #ballCenter {
+    border-radius: 100%;
+    transition-duration: 2s;
+    height: 50%;
+    width: 50%;
+    padding: 0;
+    box-shadow: 0px 5px 50px 1px inset;
+  }
+
+  #ballCenter.centered {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+  }
+
+  #ballText {
+    transition-duration: 1s;
+    font-size: 6vmin;
+    top: 30%;
+  }
+}
+
+/* Extra small devices (phones, 350px and up) */
+@media only screen and (min-width: 350px) {
+  #ballImg {
+    width: 349px;
+    margin: auto;
+  }
+
+  #ballBody {
+    width: 30%;
+    height: 30%;
+    padding: 0vmin;
+  }
+
+  #ballCenter {
+    border-radius: 100%;
+    transition-duration: 2s;
+    height: 20vmax;
+    width: 20vmax;
+    padding: 0;
+    box-shadow: 0px 5px 50px 1px inset;
+  }
+
+  #ballCenter.centered {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+  }
+
+  #ballText {
+    transition-duration: 2s;
+    font-size: 3vh;
+    top: 25%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  #ballImg {
+    width: 387px;
+  }
+
+  #ballBody {
+    width: 35%;
+    height: 35%;
+  }
+
+  #ballText {
+    top: 30%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  #ballImg {
+    width: 425px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  #ballImg {
+    width: 460px;
+  }
+}
+
+/* Large devices (laptops/desktops, 1020px and up) */
+@media only screen and (min-width: 1020px) {
+  #ballImg {
+    width: 480px;
+  }
+
+  #ballDiv {
+    margin-top: 40px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  #ballImg {
+    width: 500px;
+  }
+
+  #ballCenter {
+    height: 18vmax;
+    width: 18vmax;
+  }
+
+  #ballDiv {
+    margin-top: 15px;
+  }
+}
+
+/* handle landscape mode */
+/* @media only screen and (orientation: landscape) {
+     img {
+      width: 50%;
+    }
+
+    #ballImg {
+    width: 250px;
+  } 
+  
+} */
